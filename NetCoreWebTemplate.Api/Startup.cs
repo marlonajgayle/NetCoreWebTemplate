@@ -114,8 +114,15 @@ namespace NetCoreWebTemplate.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            else 
+            {
+                app.UseHsts();
+            }
 
-            // Enable IP Rate Limiting Middelware
+            // Enable Security Http Headers Middleware
+            app.UseHttpSecurityHeaders();
+
+            // Enable IP Rate Limiting Middleware
             app.UseIpRateLimiting();
 
             // Enable CORS Policy
