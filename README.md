@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/marlongayle/NetCoreWebTemplate/_apis/build/status/NetCoreWebTemplate-Build-Pipeline?branchName=master)](https://dev.azure.com/marlongayle/NetCoreWebTemplate/_build/latest?definitionId=1&branchName=master)
+
 # NET Core 3 Web Template
 Net Core Web Template application built using ASP.NET Core 3.1 and Entity Framework Core.
 
