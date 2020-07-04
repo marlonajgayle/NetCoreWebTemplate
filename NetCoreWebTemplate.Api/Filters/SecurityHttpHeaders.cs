@@ -63,7 +63,7 @@ namespace NetCoreWebTemplate.Api.Filters
             // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
             // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
             // TODO change the value of each rule and check the documentation to see if new rules are available
-            context.Response.Headers.Add("Content-Security-Policy", new StringValues("default-src 'self'"));
+            context.Response.Headers.Add("Content-Security-Policy", new StringValues("default-src 'self'; style-src 'self' 'unsafe-inline';"));
 
             await next(context);
         }
