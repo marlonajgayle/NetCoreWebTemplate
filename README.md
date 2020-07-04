@@ -14,8 +14,15 @@ You will need the following tools:
 * .NET Core 3.1 (LTS)
 * ASP.NET Core 3
 * Entity Framework Core 3
+* xUnit
+
+## Third Party Libraries
+* AutoMApper
 * Fluent Validation
+* MailKit
 * MediatR
+* NLog
+
 
 ## Versions
 The [master](https://github.com/marlonajgayle/NetCoreWebTemplate/master) branch is running .NET Core 3.1
