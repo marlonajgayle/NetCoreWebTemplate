@@ -4,19 +4,19 @@ using System.Runtime.Serialization;
 namespace NetCoreWebTemplate.Application.Common.Exceptions
 {
     [Serializable]
-    public class BadRequestException : Exception
+    public class UnauthorizedException : Exception
     {
-        public BadRequestException()
+        public UnauthorizedException()
         {
         }
 
-        public BadRequestException(string message)
+        public UnauthorizedException(string message)
             : base(message)
         {
         }
 
         // Without this constructor, deserialization will fail
-        protected BadRequestException(SerializationInfo info, StreamingContext context)
+        protected UnauthorizedException(SerializationInfo info, StreamingContext context)
         : base(info, context)
         {
         }
