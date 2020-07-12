@@ -14,5 +14,10 @@
             public const string Update = Base + "/clients/{clientId}";
             public const string Delete = Base + "/clients/{clientId}";
         }
+
+        public static class Identity
+        {
+            public const string Create = Base + "/account";
+        }
     }
 }

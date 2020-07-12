@@ -6,6 +6,5 @@ namespace NetCoreWebTemplate.Infrastructure.Identity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public long ClientId { get; set; }
     }
 }
