@@ -154,6 +154,11 @@ namespace NetCoreWebTemplate.Api
             }
 
             // Enable Security Http Headers Middleware
+            app.UseXContentTypeOptions();
+            app.UseReferrerPolicy(opts => opts.NoReferrer());
+            app.UseXXssProtection(options => options.EnabledWithBlockMode());
+            app.UseXfo(options => options.Deny());
+
             app.UseHttpSecurityHeaders();
 
             // Enable IP Rate Limiting Middleware
