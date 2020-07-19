@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using NetCoreWebTemplate.Application.Common.Exceptions;
 using Newtonsoft.Json;
 using System;
@@ -11,10 +12,12 @@ namespace NetCoreWebTemplate.Api.Filters
     public class CustomExceptionHandlerMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly ILogger<CustomExceptionHandlerMiddleware> logger;
 
-        public CustomExceptionHandlerMiddleware(RequestDelegate next)
+        public CustomExceptionHandlerMiddleware(RequestDelegate next, ILogger<CustomExceptionHandlerMiddleware> logger)
         {
             _next = next;
+            this.logger = logger;
         }
 
         public async Task Invoke(HttpContext context)
@@ -32,7 +35,6 @@ namespace NetCoreWebTemplate.Api.Filters
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             var code = HttpStatusCode.InternalServerError;
-
             var result = string.Empty;
 
             switch (exception)
@@ -45,6 +47,10 @@ namespace NetCoreWebTemplate.Api.Filters
                     code = HttpStatusCode.BadRequest;
                     result = badRequestException.Message;
                     break;
+                case UnauthorizedException unauthorizedException:
+                    code = HttpStatusCode.BadRequest;
+                    result = JsonConvert.SerializeObject(new { isSuccess = false, error = unauthorizedException.Message });
+                    break;
                 case NotFoundException _:
                     code = HttpStatusCode.NotFound;
                     break;
@@ -55,9 +61,15 @@ namespace NetCoreWebTemplate.Api.Filters
 
             if (result == string.Empty)
             {
-                result = JsonConvert.SerializeObject(new { error = exception.Message });
-            }
+                result = JsonConvert.SerializeObject(new
+                {
+                    error = "We encountered an error and cannot fulfill your request. " +
+                    "The error has been logged and we will work hard to get this fixed as soon as possible."
+                });
 
+                logger.LogError("An Internal Server Error occured: " + exception.StackTrace);
+            }
+            
             return context.Response.WriteAsync(result);
         }
     }
