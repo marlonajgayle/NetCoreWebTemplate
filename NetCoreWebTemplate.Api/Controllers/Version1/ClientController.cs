@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetCoreWebTemplate.Api.Contracts.Version1.Requests;
@@ -10,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace NetCoreWebTemplate.Api.Controllers.Version1
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class ClientController : ControllerBase
     {

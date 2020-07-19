@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using NetCoreWebTemplate.Api.Contracts.Version1.Requests;
 using NetCoreWebTemplate.Api.Routes.Version1;
 using NetCoreWebTemplate.Application.Identity.Commands.CreateAccount;
+using NetCoreWebTemplate.Application.Identity.Commands.Login;
 using System.Threading.Tasks;
 
 namespace NetCoreWebTemplate.Api.Controllers.Version1
@@ -39,6 +40,26 @@ namespace NetCoreWebTemplate.Api.Controllers.Version1
             var result = await mediator.Send(command);
 
             return CreatedAtAction("CreateAccount", result);
+        }
+
+        /// <summary>
+        /// Authenticates user credentials
+        /// </summary>
+        /// <response code="200">Authenticates user credentials</response>
+        /// <response code="401">Unable to to authenticate due to validation error</response>
+        /// <response code="429">Too Many Requests</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
+        [HttpPost(ApiRoutes.Identity.Login)]
+        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
+        {
+            var loginDto = mapper.Map<LoginDto>(loginRequest);
+
+            var command = new LoginCommand(loginDto);
+            var result = await mediator.Send(command);
+
+            return Ok(result);
         }
     }
 }

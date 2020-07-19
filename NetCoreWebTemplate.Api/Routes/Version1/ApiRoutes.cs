@@ -17,7 +17,8 @@
 
         public static class Identity
         {
-            public const string Create = Base + "/account";
+            public const string Create = Base + "identity/account";
+            public const string Login = Base + "identity/login";
         }
     }
 }
