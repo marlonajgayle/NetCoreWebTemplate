@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using NetCoreWebTemplate.Application.Common.Models;
 using System.Threading.Tasks;
 
 namespace NetCoreWebTemplate.Application.Common.Interfaces
@@ -19,5 +20,21 @@ namespace NetCoreWebTemplate.Application.Common.Interfaces
         /// <param name="email"></param>
         /// <returns></returns>
         Task<bool> FindByEmailAsync(string email);
+
+        /// <summary>
+        /// SignIn User
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        Task<bool> SignInAsync(string email, string password);
+
+        /// <summary>
+        /// Generate JWT token
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        AuthenticationResult GenerateJwtToken(string email);
     }
 }

@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Common\Models\" />
     <Folder Include="Notifications\Sms\" />
   </ItemGroup>
 
